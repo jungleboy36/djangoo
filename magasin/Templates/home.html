@@ -1,0 +1,54 @@
+{% include "navBar.html" %}
+<div class="container">
+<div class="card mb-6"> 
+<div class="card-body">
+   <script>
+      function supprimer(){
+       let s =confirm("Vous etes sure ?");
+      return s;}
+  </script>
+ <h1>Liste des articles</h1>
+ <p id="date"></p><br>
+<script>
+    n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDate();
+document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+</script>
+ <table class="table table-stripped">
+ <thead>
+ <tr>
+ <td>ID</td>
+ <td>Libelle</td>
+ <td>Prix (DT)</td>
+ <td>Quantité</td>
+ <td>Date d'ajout</td>
+ <td>Apprivisonner</td>
+ <td>Supprimer</td>
+ </tr>
+ </thead>
+ <tbody>
+ {% for a in art reversed %}
+ <tr>
+ <td>{{ a.id }}</td>
+ <td>{{ a.libelle }}</td>
+ <td>{{ a.prix }}</td>
+ <td>{{ a.qte }}</td>
+ <td>{{ a.dateAjout }}</td>
+    {% if a.qte < 5 %}
+     <td>Oui</td>
+    {% else %}
+    <td>Non</td>
+    {% endif %}
+ </td>
+ <td><a onclick="return supprimer()" href="del_art/{{ a.id }}"> <img height="32" width="32" src="{% static 'img/delete.jfif' %}"></a></td>
+ </tr>
+ {% endfor %}
+</div>
+</div>
+</div>
+ </tbody> 
+ </table>
+</body>
+</html>
